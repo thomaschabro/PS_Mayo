@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-rj2mw#6(7wd3ijiid+vc3h*(zrk(d=$7s63xz0ag8$hkk&$3s%
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['https://mayo-todo-list-daabdwgcfsfqahh9.germanywestcentral-01.azurewebsites.net/']
+ALLOWED_HOSTS = ['mayo-todo-list-daabdwgcfsfqahh9.germanywestcentral-01.azurewebsites.net', '000.00.00.00']
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
