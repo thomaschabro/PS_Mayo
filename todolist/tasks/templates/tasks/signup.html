@@ -1,0 +1,43 @@
+{% load static %} {% block content %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8" />
+    <title>Cadastro</title>
+    <link rel="stylesheet" href="{% static 'tasks/style/index.css' %}" />
+  </head>
+  <body>
+    <div class="login-container">
+      <h1>Cadastro</h1>
+      <form id="formLogin" method="POST">
+        {% csrf_token %}
+        <label for="login">Login:</label>
+        <input
+          name="login"
+          id="login"
+          placeholder="Digite seu e-mail ou nome de usuário"
+          required
+        />
+        <label for="pswd">Senha:</label>
+        <input
+          name="pswd"
+          type="password"
+          id="pswd"
+          placeholder="Digite sua senha"
+          required
+        />
+        <label for="pswdConfirmation">Confirmação de senha:</label>
+        <input
+          type="password"
+          id="pswdConfirmation"
+          placeholder="Digite sua senha novamente"
+          required
+        />
+        <button type="submit">Cadastrar</button>
+      </form>
+    </div>
+  </body>
+</html>
+
+{% endblock %}

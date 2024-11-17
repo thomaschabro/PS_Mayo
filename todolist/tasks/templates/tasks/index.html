@@ -1,0 +1,38 @@
+{% load static %} {% block content %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8" />
+    <title>Login</title>
+    <link rel="stylesheet" href="{% static 'tasks/style/index.css' %}" />
+  </head>
+  <body>
+    <div class="login-container">
+      <h1>To-do List</h1>
+      <p class="subtitle">Faça login para acessar sua lista</p>
+      <form id="formLogin" method="POST">
+        {% csrf_token %}
+        <label for="login">Login:</label>
+        <input
+          id="login"
+          placeholder="Digite seu e-mail ou nome de usuário"
+          required
+        />
+        <label for="pswd">Senha:</label>
+        <input
+          type="password"
+          id="pswd"
+          placeholder="Digite sua senha"
+          required
+        />
+        <button type="submit">Entrar</button>
+      </form>
+      <p class="cadastro">
+        Não tem uma conta? <form><a href="signup" onclick="index">Cadastre-se</a></form>
+      </p>
+    </div>
+  </body>
+</html>
+
+{% endblock %}
