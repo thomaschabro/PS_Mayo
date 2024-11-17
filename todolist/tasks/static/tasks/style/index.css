@@ -8,12 +8,23 @@
 body {
   font-family: "Arial", sans-serif;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100vh;
   background: #6a11cb;
   color: #fff;
   margin: 0;
+}
+
+.django-error {
+  font-size: 12px;
+  padding-bottom: 10px;
+}
+
+.django-error a {
+  color: red;
+  font-weight: bold;
 }
 
 .login-container {
@@ -90,6 +101,7 @@ body {
 .login-container .cadastro a {
   color: #6a11cb;
   font-weight: bold;
+  text-decoration: none;
 }
 
 .login-container .cadastro a:hover {
