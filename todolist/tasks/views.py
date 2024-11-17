@@ -51,21 +51,53 @@ def signup(request):
 
 
 def home(request):
-    if 'user_id' in request.session and 'access_token' in request.session:
+    if request.method == 'GET':
+        if 'user_id' in request.session and 'access_token' in request.session:
 
-        try:
-            if JWTAuthentication().get_validated_token(request.session['access_token']):
-                user = User.objects.get(id=request.session['user_id'])
-                tasks = Task.objects.filter(user=user)
-                return render(request, 'tasks/home.html', {'user': user, 'tasks': tasks})
-            else:
+            try:
+                if JWTAuthentication().get_validated_token(request.session['access_token']):
+                    user = User.objects.get(id=request.session['user_id'])
+                    tasks = Task.objects.filter(user=user)
+                    return render(request, 'tasks/home.html', {'user': user, 'tasks': tasks})
+                else:
+                    messages.error(request, 'Sua sessão expirou. Por favor, faça login novamente.')
+                    return redirect('index')
+
+            except (InvalidToken, TokenError):
                 messages.error(request, 'Sua sessão expirou. Por favor, faça login novamente.')
                 return redirect('index')
 
-        except (InvalidToken, TokenError):
-            messages.error(request, 'Sua sessão expirou. Por favor, faça login novamente.')
+        else:
+            messages.error(request, 'Faça login para acessar esta página.')
             return redirect('index')
 
+    elif request.method == 'POST':
+        request_dict = request.POST.dict()
+
+        if request_dict.get('submit') == 'save':
+            title = request_dict.get('title')
+            description = request_dict.get('description')
+            status = request_dict.get('status')
+            creation_date = request_dict.get('creationDate')
+            # Edit creation_date to only save the day, month and year (without the time) in a string format
+            creation_date = creation_date.split('T')[0]
+
+            update_date = request_dict.get('updateDate')
+            user = User.objects.get(id=request.session['user_id'])
+            print(f'Tarefa criada com atributos: {title}, {description}, {status}, {creation_date}, {update_date}, {user}')
+            task = Task(title=title, description=description, status=status, created_at=creation_date, updated_at=update_date, user=user)
+            task.save()
+            return redirect('home')
+        elif request_dict.get('submit') == 'delete':
+            task_id = request_dict.get('id')
+            task = Task.objects.get(id=task_id)
+            task.delete()
+            return redirect('home')
+        elif request_dict.get('submit') == 'update-status':
+            task_id = request_dict.get('id')
+            task = Task.objects.get(id=task_id)
+            task.status = request_dict.get('status')
+            task.save()
+            return redirect('home')
     else:
-        messages.error(request, 'Faça login para acessar esta página.')
-        return redirect('index')
+        return render(request, 'tasks/home.html')

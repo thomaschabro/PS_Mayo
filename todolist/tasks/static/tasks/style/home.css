@@ -77,21 +77,23 @@ body {
   background-color: #c0392b; /* Cor mais escura no hover */
 }
 
+/* Task container */
 .tasks-container {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 20px;
-  width: 100%;
   padding: 20px;
+  width: 100%;
 }
 
+/* Individual task card */
 .task {
   background: #ffffff;
   color: #333;
-  padding: 15px;
+  padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  text-align: center;
+  text-align: left;
   font-weight: bold;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -101,13 +103,78 @@ body {
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
 }
 
-.task a {
-  text-decoration: none;
+/* Title */
+.task h3 {
+  font-size: 20px;
+  color: #6a11cb;
+  margin-bottom: 10px;
+}
+
+/* Description */
+.task .description {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 15px;
+}
+
+/* Task details (status and dates) */
+.task .task-details {
+  font-size: 14px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.task .task-details .status {
+  font-weight: bold;
+  color: #6a11cb;
+  margin-bottom: 10px;
+}
+
+.task .task-details .status .status-value {
+  font-weight: normal;
+  color: #333;
+}
+
+.task .task-details .dates {
+  margin-top: 10px;
+}
+
+.task .task-details .dates .date {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.task .task-details .dates .date strong {
   color: #6a11cb;
 }
 
-.task a:hover {
-  color: #5b0f9c;
+/* Delete button */
+.delete button {
+  cursor: pointer;
+  border: none;
+  font-size: 15px;
+  background: none;
+  padding: 5px 10px;
+  transition: color 0.3s ease;
+}
+
+.btn-delete {
+  color: #e74c3c;
+}
+
+.btn-delete:hover {
+  color: #c0392b;
+  text-decoration: underline;
+}
+
+.btn-update {
+  color: #089744;
+}
+
+.btn-update:hover {
+  color: #08712d;
+  text-decoration: underline;
 }
 
 .popup {
@@ -171,6 +238,7 @@ body {
   align-items: center;
   color: #6a11cb;
   margin: 10px 0;
+  margin-top: 20px;
 }
 
 #taskDate {
@@ -188,4 +256,15 @@ body {
 
 .datesContainer a {
   color: #6a11cb;
+}
+
+.status-value {
+  margin-left: 10px;
+}
+
+.taskFooter {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
