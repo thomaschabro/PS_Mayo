@@ -88,11 +88,13 @@ def home(request):
             task = Task(title=title, description=description, status=status, created_at=creation_date, updated_at=update_date, user=user)
             task.save()
             return redirect('home')
+
         elif request_dict.get('submit') == 'delete':
             task_id = request_dict.get('id')
             task = Task.objects.get(id=task_id)
             task.delete()
             return redirect('home')
+
         elif request_dict.get('submit') == 'update-status':
             task_id = request_dict.get('id')
             task = Task.objects.get(id=task_id)
@@ -100,6 +102,7 @@ def home(request):
             task.status = request_dict.get('status')
             task.save()
             return redirect('home')
+
         elif request_dict.get('submit') == 'logout':
             del request.session['user_id']
             del request.session['access_token']
