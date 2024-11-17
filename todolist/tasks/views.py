@@ -96,8 +96,15 @@ def home(request):
         elif request_dict.get('submit') == 'update-status':
             task_id = request_dict.get('id')
             task = Task.objects.get(id=task_id)
+            print(f'Tarefa {task_id} atualizada com status {request_dict.get("status")}')
             task.status = request_dict.get('status')
             task.save()
             return redirect('home')
+        elif request_dict.get('submit') == 'logout':
+            del request.session['user_id']
+            del request.session['access_token']
+            del request.session['refresh_token']
+            return redirect('index')
+
     else:
         return render(request, 'tasks/home.html')

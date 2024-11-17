@@ -7,12 +7,19 @@ function closeModal() {
   document.getElementById("taskModal").style.display = "none";
 }
 
-// Função para simular o logout
-function logout() {
-  alert("Você foi deslogado.");
-}
+document.addEventListener("DOMContentLoaded", function () {
+  const statusOptions = ["Pendente", "Concluída"];
+  const taskElements = document.querySelectorAll("#taskStatusUpdate");
 
-function displayTask(id) {
-  var card = document.getElementById("taskModal");
-  card.style.display = "block";
-}
+  taskElements.forEach(function (taskElement) {
+    statusOptions.forEach(function (status) {
+      const option = document.createElement("option");
+      option.value = status;
+      option.text = status;
+      if (taskElement.getAttribute("value") === status) {
+        option.selected = true;
+      }
+      taskElement.appendChild(option);
+    });
+  });
+});

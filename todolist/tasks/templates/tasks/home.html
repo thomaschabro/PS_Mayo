@@ -15,9 +15,14 @@
       </div>
       <div class="actions">
         <button class="btn-task" onclick="createTask()">Criar Tarefa</button>
-        <button class="btn-logout" onclick="logout()">Logout</button>
+        <form method="POST">
+          {% csrf_token %}
+          <input type="hidden" name="submit" value="logout" />
+          <button class="btn-logout" onclick="logout()">Logout</button>
+        </form>
       </div>
     </div>
+
     <div id="taskModal" class="popup">
       <div class="popup-content">
         <form id="createTask" method="POST">
@@ -43,7 +48,7 @@
             <label for="taskStatus">Status: </label>
             <select id="taskStatus" name="status">
               <option value="Pendente">Pendente</option>
-              <option value="Completa">Completa</option>
+              <option value="Concluída">Concluída</option>
             </select>
           </div>
           <div class="datesContainer">
@@ -69,6 +74,7 @@
         </form>
       </div>
     </div>
+
     <div class="tasks-container">
       {% for task in tasks %}
       <div class="task">
@@ -86,37 +92,39 @@
             </div>
           </div>
           <div class="status">
-            Status:
-            <span
-              style="text-transform: uppercase; font-weight: bold"
-              class="status-value"
-              >{{ task.status }}</span
-            >
+            <form method="POST" class="row">
+              {% csrf_token %}
+              <input type="hidden" name="id" value="{{ task.id }}" />
+              <label for="taskStatusUpdate">Status: </label>
+              <select
+                id="taskStatusUpdate"
+                name="status"
+                value="{{ task.status }}"
+              ></select>
+              <button
+                class="btn-update"
+                type="submit"
+                name="submit"
+                value="update-status"
+                style="font-weight: bold"
+              >
+                Atualizar
+              </button>
+            </form>
           </div>
         </div>
         <form method="POST" class="delete">
           {% csrf_token %}
           <input type="hidden" name="id" value="{{ task.id }}" />
-          <div class="taskFooter">
-            <button
-              class="btn-delete"
-              type="submit"
-              name="submit"
-              value="delete"
-              style="font-weight: bold"
-            >
-              Deletar
-            </button>
-            <button
-              class="btn-update"
-              type="submit"
-              name="submit"
-              value="update-status"
-              style="font-weight: bold"
-            >
-              Concluir
-            </button>
-          </div>
+          <button
+            class="btn-delete"
+            type="submit"
+            name="submit"
+            value="delete"
+            style="font-weight: bold"
+          >
+            Deletar
+          </button>
         </form>
       </div>
       {% endfor %}
