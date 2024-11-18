@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-rj2mw#6(7wd3ijiid+vc3h*(zrk(d=$7s63xz0ag8$hkk&$3s%
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['mayo-todo-list-daabdwgcfsfqahh9.germanywestcentral-01.azurewebsites.net', '000.00.00.00']
+ALLOWED_HOSTS = ['mayo-todo-list-daabdwgcfsfqahh9.germanywestcentral-01.azurewebsites.net', '*']
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
@@ -154,3 +154,12 @@ CACHES = {
 
 SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
 SESSION_CACHE_ALIAS = 'default'
+
+import os
+
+# Busca a SECRET_KEY do ambiente
+SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
+
+# Verifica se a SECRET_KEY foi definida
+if not SECRET_KEY:
+    raise ValueError("A variável de ambiente DJANGO_SECRET_KEY não foi configurada!")
