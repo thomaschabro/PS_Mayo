@@ -29,7 +29,11 @@ DEBUG = False
 
 ALLOWED_HOSTS = ['mayo-todo-list-daabdwgcfsfqahh9.germanywestcentral-01.azurewebsites.net', '*']
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles/')
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static')
+]
 
 # Application definition
 
