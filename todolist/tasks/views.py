@@ -21,6 +21,7 @@ def index(request):
             request.session['user_id'] = user.id
             request.session['access_token'] = access_token
             request.session['refresh_token'] = refresh_token
+            print(f'User ID INDEX: {request.session.get("user_id")}')
             return redirect('home')
 
         else:
@@ -51,8 +52,10 @@ def signup(request):
 
 
 def home(request):
+    print(f'User ID HOME: {request.session.get("user_id")}')
     if request.method == 'GET':
         if 'user_id' in request.session and 'access_token' in request.session:
+            print(f'User ID: {request.session["user_id"]}')
 
             try:
                 if JWTAuthentication().get_validated_token(request.session['access_token']):
@@ -61,7 +64,7 @@ def home(request):
                     return render(request, 'tasks/home.html', {'user': user, 'tasks': tasks})
                 else:
                     messages.error(request, 'Sua sessão expirou. Por favor, faça login novamente.')
-                    return redirect('index')
+                    return render(request, 'index')
 
             except (InvalidToken, TokenError):
                 messages.error(request, 'Sua sessão expirou. Por favor, faça login novamente.')

@@ -31,9 +31,6 @@ ALLOWED_HOSTS = ['mayo-todo-list-daabdwgcfsfqahh9.germanywestcentral-01.azureweb
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles/')
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static')
-]
 
 # Application definition
 
@@ -149,7 +146,8 @@ SIMPLE_JWT = {
 CACHES = {
     'default': {
         'BACKEND': 'django_redis.cache.RedisCache',
-        'LOCATION': 'redis://127.0.0.1:6379/1',  # Altere conforme o endereço do seu Redis
+        'LOCATION': 'redis://127.0.0.1:6379',
+        'TIMEOUT': 300,
         'OPTIONS': {
             'CLIENT_CLASS': 'django_redis.client.DefaultClient',
         }
