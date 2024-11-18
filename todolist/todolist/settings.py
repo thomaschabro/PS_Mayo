@@ -79,12 +79,11 @@ WSGI_APPLICATION = 'todolist.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-import dj_database_url
-
 DATABASES = {
-    'default': dj_database_url.config(
-        default='postgres://USER:PASSWORD@HOST:PORT/DB_NAME'
-    )
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',  # Usa o diretório base do projeto para armazenar o arquivo do banco
+    }
 }
 
 # Password validation
