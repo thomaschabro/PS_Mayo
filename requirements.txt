@@ -25,7 +25,6 @@ PyJWT==2.10.0
 PyMySQL==1.1.1
 pypiwin32==223
 python-dateutil==2.9.0.post0
-pywin32==308
 PyYAML==6.0.2
 redis==5.2.0
 requests==2.32.3
